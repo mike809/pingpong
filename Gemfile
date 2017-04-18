@@ -14,6 +14,8 @@ gem 'devise-bootstrap-views', '~> 0.0.6'
 gem 'pry-rails'
 gem 'pry-byebug'
 
+gem 'slim-rails'
+
 group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
