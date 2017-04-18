@@ -1,5 +1,32 @@
 h1.page-header
   | Log Game
-.alert.alert-warning[role="alert"]
-  | This is a sample page. Replace link in the header with your own.
+
+.game-logger
+  = form_tag(log_game_url) do
+    .row
+      .col-sm-2
+        = label_tag 'Date Played'
+      .col-sm-9
+        = date_select('date_played', 'date', selected: Date.today, order: [:month, :day, :year])
+    .row
+      .col-sm-2
+        = label_tag 'Opponent'
+      .col-sm-9
+        = select_tag :opponent, options_from_collection_for_select(@users, :id, :first_name)
+    .row
+      .col-sm-2
+        = label_tag 'Your Score'
+      .col-sm-9
+        = text_field_tag :your_score
+    .row
+      .col-sm-2
+        = label_tag 'Their Score'
+      .col-sm-9
+        = text_field_tag :their_score
+    .row
+      .col-sm-2.col-sm-offset-2
+        = submit_tag 'Save'
+      .col-sm-2
+        = link_to 'Cancel', root_path
+
 = image_tag('log_game.png')

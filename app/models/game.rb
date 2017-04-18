@@ -46,7 +46,7 @@ class Game < ActiveRecord::Base
   end
 
   def date
-    created_at.strftime('%b %e')
+    date_played.strftime('%b %e')
   end
 
   private def compute_new_ratings(k_value=32,should_round=true)

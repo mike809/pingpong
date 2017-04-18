@@ -17,5 +17,6 @@ FactoryGirl.define do
     player_2
     player_1_score { 21 }
     player_2_score { Faker::Number.between(1, 18) }
+    date_played { Faker::Date.between(2.days.ago, Date.today) }
   end
 end
