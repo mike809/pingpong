@@ -14,9 +14,8 @@ gem 'pry-rails'
 gem 'pry-byebug'
 
 gem 'slim-rails'
-
+gem 'pg'
 group :development, :test do
-  gem 'sqlite3'
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'annotate'
@@ -26,6 +25,3 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
-group :production do
-  gem 'pg'
-end
