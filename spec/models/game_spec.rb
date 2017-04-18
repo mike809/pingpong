@@ -5,17 +5,27 @@ RSpec.describe Game, type: :model do
   let(:player_2_score) { 15 }
   let(:winner) { FactoryGirl.create(:user) }
   let(:loser) { FactoryGirl.create(:user) }
-  let(:game) do
-    FactoryGirl.build :game,
+
+  subject(:game) do
+    FactoryGirl.build :game, {
       player_1: winner,
-      player_1: loser,
+      player_2: loser,
       player_1_score: player_1_score,
       player_2_score: player_2_score
+    }
   end
 
   context 'when we create a game with player 1 as a winner' do
     it 'has a the correct winner' do
       expect(game.winner).to be game.player_1
+    end
+
+    it 'increases the rating of the winner' do
+      expect{ subject.save }.to change{ winner.rating }
+    end
+
+    it 'decreases the rating of the loser' do
+      expect{ subject.save }.to change{ loser.rating }
     end
   end
 

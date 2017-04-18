@@ -15,8 +15,8 @@ class Game < ActiveRecord::Base
 
   private def compute_new_ratings(k_value=32,should_round=true)
     #Calculate expected results
-    player1_expectation = 1/(1+10**((player_2.rating - player_1.rating)/400.0)) #the .0 is important to force float operations!))
-    player2_expectation = 1/(1+10**((player_1.rating - player_2.rating)/400.0))
+    player1_expectation = 1.0/(1+10**((player_2.rating - player_1.rating)/400.0)) #the .0 is important to force float operations!))
+    player2_expectation = 1.0/(1+10**((player_1.rating - player_2.rating)/400.0))
 
     #Calculate new ratings
     player1_new_rating = player_1.rating + (k_value*(player_1_score - player1_expectation))
@@ -25,9 +25,12 @@ class Game < ActiveRecord::Base
     #Optional rounding
     if should_round
       # int rounds down and forces type
-      player_1.update_attribute(:rating, player1_new_rating.round)
-      player_2.update_attribute(:rating, player2_new_rating.round)
+      player1_new_rating = player1_new_rating.round
+      player2_new_rating = player2_new_rating.round
     end
+
+    player_1.update_attribute(:rating, player1_new_rating)
+    player_2.update_attribute(:rating, player2_new_rating)
   end
 
   private def max_score
