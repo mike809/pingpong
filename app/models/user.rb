@@ -21,7 +21,15 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :trackable, :validatable
 
+  default_scope { order('rating DESC') }
+
+  alias_attribute :score, :rating
+
   def games
     Game.where('player_1_id = ? OR player_2_id = ?', self.id, self.id)
+  end
+
+  def games_played
+    games.count
   end
 end

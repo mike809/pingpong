@@ -1,5 +1,23 @@
 h1.page-header
   | Leaderboard
-.alert.alert-warning[role="alert"]
-  | This is a sample page.
-= image_tag('leaderboard.png')
+
+
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th Rank
+      th Name
+      th Score
+      th Games Played
+  tbody
+    - @users.each_with_index do |user, index|
+      tr
+        td
+          / index + (page * per_page) if we paginate
+          = index + 1
+        td
+          = user.first_name
+        td
+          = user.score
+        td
+          = user.games_played
