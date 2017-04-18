@@ -16,16 +16,22 @@ RSpec.describe Game, type: :model do
   end
 
   context 'when we create a game with player 1 as a winner' do
+    let(:initial_rating) { 1000 }
+
+    before do
+      subject.save
+    end
+
     it 'has a the correct winner' do
       expect(game.winner).to be game.player_1
     end
 
     it 'increases the rating of the winner' do
-      expect{ subject.save }.to change{ winner.rating }
+      expect(winner.rating).to be > initial_rating
     end
 
     it 'decreases the rating of the loser' do
-      expect{ subject.save }.to change{ loser.rating }
+      expect(loser.rating).to be < initial_rating
     end
   end
 
