@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418025655) do
+ActiveRecord::Schema.define(version: 20170418050626) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "player_1_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170418025655) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "rating",                 default: 1000
+    t.string   "first_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
