@@ -13,6 +13,29 @@ class Game < ActiveRecord::Base
     player_1_score > player_2_score ? player_1 : player_2
   end
 
+  def opponent(user)
+    opponent = user == player_1 ? player_2 : player_1
+    opponent.first_name
+  end
+
+  def score(user)
+    if user == player_1
+      user_score, other_user_score = player_1_score, player_2_score
+    else
+      user_score, other_user_score = player_2_score, player_1_score
+    end
+
+    "#{user_score}-#{other_user_score}"
+  end
+
+  def result(user)
+    user == winner ? 'W' : 'L'
+  end
+
+  def date
+    created_at.strftime('%b %e')
+  end
+
   private def compute_new_ratings(k_value=32,should_round=true)
     result = player_1_score > player_2_score ? 1 : 0
     player_1_result = result
@@ -49,7 +72,7 @@ class Game < ActiveRecord::Base
 
   private def score_difference_greater_than_one
     unless score_difference > 1
-      errors.add(:score_difference, 'Have to win game by more than 2 or more points')
+      errors.add(:score_difference, 'Have to win game by 2 or more points')
     end
   end
 end
