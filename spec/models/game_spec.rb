@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id             :integer          not null, primary key
+#  player_1_id    :integer
+#  player_2_id    :integer
+#  player_1_score :integer
+#  player_2_score :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do

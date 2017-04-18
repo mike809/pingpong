@@ -16,6 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  rating                 :integer          default("1000")
+#  first_name             :string
 #
 
 class User < ActiveRecord::Base
