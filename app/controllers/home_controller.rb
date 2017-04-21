@@ -25,8 +25,7 @@ class HomeController < ApplicationController
     if game.save
       redirect_to :history
     else
-      # raise NotImplementedError
-      # render :some_kind_of_error
+      render plain: game.errors.messages
     end
   end
 end

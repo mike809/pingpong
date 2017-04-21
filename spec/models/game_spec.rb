@@ -73,4 +73,13 @@ RSpec.describe Game, type: :model do
       end
     end
   end
+  
+  context 'when we create a game with score that doesnt reach 21' do
+    let(:player_1_score) { 1 }
+    let(:player_2_score) { 5 }
+
+    it 'is not a valid game' do
+      expect(game).not_to be_valid
+    end
+  end
 end

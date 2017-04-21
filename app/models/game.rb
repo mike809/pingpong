@@ -17,6 +17,7 @@ class Game < ActiveRecord::Base
 
   validate :score_difference_greater_than_one
   validate :max_score
+  validate :min_score
 
   validates_presence_of :player_1, :player_2, :player_1_score, :player_2_score
 
@@ -76,6 +77,12 @@ class Game < ActiveRecord::Base
   private def max_score
     unless [player_1_score, player_2_score].max <= 21 || score_difference == 2
       errors.add(:max_score, 'Score exceeds the maximum of 21')
+    end
+  end
+ 
+  private def min_score
+    if [player_1_score, player_2_score].max < 21
+      errors.add(:min_score, 'Score needs to be at least 21 for one of the playes.')
     end
   end
 
